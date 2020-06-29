@@ -4,13 +4,13 @@
  * @format
  */
 
-import React, {useContext} from 'react';
+import React, {FC, useContext} from 'react';
 import {SafeAreaView, View, Text, Button} from 'react-native';
 import {StateContext, DispatchContext, ContextProvider} from './src/context';
 import useFilms from './src/api/hooks/useFilms';
 import useFilm from './src/api/hooks/useFilm';
 
-const App: React.FC = () => {
+const App: FC = () => {
   return (
     <>
       <SafeAreaView>
@@ -24,7 +24,7 @@ const App: React.FC = () => {
 
 /** dibawah ini adalah component 1,2,3,4 **/
 
-const Component1: React.FC = () => {
+const Component1: FC = () => {
   const AppState = useContext(StateContext);
 
   return (
@@ -39,7 +39,7 @@ const Component1: React.FC = () => {
   );
 };
 
-const Component2: React.FC = () => {
+const Component2: FC = () => {
   const AppState = useContext(StateContext);
   const dispatch = useContext(DispatchContext);
 
@@ -63,7 +63,7 @@ const Component2: React.FC = () => {
   );
 };
 
-const Component3: React.FC = () => {
+const Component3: FC = () => {
   const {isLoading, isError, data, error} = useFilms();
 
   if (isLoading) {
@@ -86,7 +86,7 @@ const Component3: React.FC = () => {
   );
 };
 
-const Component4: React.FC = () => {
+const Component4: FC = () => {
   const {data: filmsData, isLoading: filmsIsLoading} = useFilms();
   const {isLoading, isError, data, error} = useFilm(5);
 

@@ -26,7 +26,7 @@ const App: React.FC = () => {
   );
 };
 
-/** component 1,2,3,4 **/
+/** dibawah ini adalah component 1,2,3,4 **/
 
 const Component1: React.FC = () => {
   const AppState = React.useContext(StateContext);

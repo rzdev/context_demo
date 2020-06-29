@@ -98,8 +98,8 @@ const Component3: FC = () => {
 };
 
 const Component4: FC = () => {
-  const {data: filmsData, isLoading: filmsIsLoading} = useFilms();
   const {isLoading, isError, data, error} = useFilm(5);
+  const {data: filmsData, isLoading: filmsIsLoading} = useFilms();
 
   if (isLoading) {
     return <Text>Loading...</Text>;

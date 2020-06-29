@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useContext} from 'react';
 import {SafeAreaView, View, Text, Button} from 'react-native';
 import {StateContext, DispatchContext, ContextProvider} from './src/context';
 import useFilms from './src/api/hooks/useFilms';
@@ -29,7 +29,7 @@ const App: React.FC = () => {
 /** dibawah ini adalah component 1,2,3,4 **/
 
 const Component1: React.FC = () => {
-  const AppState = React.useContext(StateContext);
+  const AppState = useContext(StateContext);
 
   return (
     <>
@@ -44,8 +44,8 @@ const Component1: React.FC = () => {
 };
 
 const Component2: React.FC = () => {
-  const AppState = React.useContext(StateContext);
-  const dispatch = React.useContext(DispatchContext);
+  const AppState = useContext(StateContext);
+  const dispatch = useContext(DispatchContext);
 
   return (
     <>

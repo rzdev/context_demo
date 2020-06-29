@@ -8,5 +8,5 @@ const getFilms = async () => {
 };
 
 export default function useFilms() {
-  return useQuery('films', getFilms);
+  return useQuery('films', getFilms, {staleTime: 3000});
 }

@@ -8,5 +8,5 @@ const getFilmById = async (_key: string, FilmId: number) => {
 };
 
 export default function usePost(FilmId: number) {
-  return useQuery(['film', FilmId], getFilmById);
+  return useQuery(['film', FilmId], getFilmById, {staleTime: 3000});
 }

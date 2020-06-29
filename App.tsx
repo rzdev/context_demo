@@ -9,6 +9,7 @@ import {SafeAreaView, View, Text, Button} from 'react-native';
 import {StateContext, DispatchContext, ContextProvider} from './src/context';
 import useFilms from './src/api/hooks/useFilms';
 import useFilm from './src/api/hooks/useFilm';
+import {queryCache} from 'react-query';
 
 const App: FC = () => {
   return (
@@ -49,14 +50,24 @@ const Component2: FC = () => {
         {AppState.lang === 'en' ? 'Select Language:' : 'Pilih Bahasa:'}
       </Text>
       <Button
-        title={'English'}
+        title={'English (Set Lang context to EN)'}
         color="#841584"
         onPress={() => dispatch({type: 'SET_LANG_EN'})}
       />
       <Button
-        title={'Bahasa'}
+        title={'Bahasa (Set Lang context to ID)'}
         color="#841584"
         onPress={() => dispatch({type: 'SET_LANG_ID'})}
+      />
+      <Button
+        title={'Change Film cache data'}
+        color="#841584"
+        onPress={() =>
+          queryCache.setQueryData(['film', 5], {
+            episode_id: 5,
+            title: 'mantap!',
+          })
+        }
       />
       {AppState.lang === 'en' ? <Component3 /> : <Component4 />}
     </>
@@ -100,7 +111,7 @@ const Component4: FC = () => {
   }
 
   return (
-    <View key={data.id}>
+    <View>
       <Text>{data.title}</Text>
       <Text>
         Total Films :

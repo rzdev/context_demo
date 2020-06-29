@@ -11,6 +11,8 @@
 import React from 'react';
 import {SafeAreaView, View, Text, Button} from 'react-native';
 import {StateContext, DispatchContext, ContextProvider} from './src/context';
+import useFilms from './src/api/hooks/useFilms';
+import useFilm from './src/api/hooks/useFilm';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +25,8 @@ const App: React.FC = () => {
     </>
   );
 };
+
+/** component 1,2,3,4 **/
 
 const Component1: React.FC = () => {
   const AppState = React.useContext(StateContext);
@@ -58,7 +62,55 @@ const Component2: React.FC = () => {
         color="#841584"
         onPress={() => dispatch({type: 'SET_LANG_ID'})}
       />
+      {AppState.lang === 'en' ? <Component3 /> : <Component4 />}
     </>
+  );
+};
+
+const Component3: React.FC = () => {
+  const {isLoading, isError, data, error} = useFilms();
+
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (isError) {
+    console.log(error);
+    return <Text>Error!</Text>;
+  }
+
+  return (
+    <>
+      {data.results.map((item: any) => (
+        <View key={item.episode_id}>
+          <Text>{item.title}</Text>
+        </View>
+      ))}
+    </>
+  );
+};
+
+const Component4: React.FC = () => {
+  const {data: filmsData, isLoading: filmsIsLoading} = useFilms();
+  const {isLoading, isError, data, error} = useFilm(5);
+
+  if (isLoading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (isError) {
+    console.log(error);
+    return <Text>Error!</Text>;
+  }
+
+  return (
+    <View key={data.id}>
+      <Text>{data.title}</Text>
+      <Text>
+        Total Films :
+        {filmsIsLoading ? 'Loading Films..' : filmsData.results.length}
+      </Text>
+    </View>
   );
 };
 
